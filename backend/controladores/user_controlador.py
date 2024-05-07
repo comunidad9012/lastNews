@@ -7,7 +7,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.post("/createUser")
 def create_user():
-    data = request.get_json()
+    data = request.json
 
     name = data["name"]
     user = data["user"]
