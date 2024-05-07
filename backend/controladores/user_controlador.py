@@ -21,6 +21,7 @@ def create_user():
     try:
         response = user_model.create_user(name, user, password, email)
         return jsonify({response})
+        print("creacion exitosa!")
     
     except Exception as e:
         return jsonify({e})
