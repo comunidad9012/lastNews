@@ -1,22 +1,27 @@
-from flask import Blueprint, request, current_app
+from flask import Blueprint, request, current_app, jsonify,current_app
 from models.modelUser import UserModel
 import json
+from flask_cors import CORS
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.post("/createUser")
 def create_user():
-    #data = request.json
+    data = request.get_json()
 
-    name = request.form.get("nombre")
-    user = request.form.get("usuario")
-    password = request.form.get("contraseña")
-    email = request.form.get("mail")
+    name = data["name"]
+    user = data["user"]
+    password = data["password"]
+    email = data["email"]
 
-    user_model = UserModel(current_app)
-    #y = json.dumps(name,user,password,email)
-
-    response = user_model.create_user(name, user, password, email)
     
+    user_model = UserModel(current_app)
 
-    return response
+
+    try:
+        response = user_model.create_user(name, user, password, email)
+        return jsonify({response})
+    
+    except Exception as e:
+        return jsonify({e})
+
