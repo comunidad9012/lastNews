@@ -12,35 +12,34 @@ coleccion=mydb["users"]
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 @user_bp.post("/createUser")
 def create_user():
-
     data = request.json
-    print("email form", data["email"])
+    email=data["email"]
 
-    #traer todos los usuarios y comparar si existe el mail
-    documentos={}
-    users=coleccion.find()
+    #traer todos los usuarios y comparar si hay coincidencia con el usuario recien ingresado el mail
+ 
+    user=coleccion.find_one({"email":email})
+
+    if user:
+        print("hay coincidencia, ya existe esa cuenta")
+        #aca hacer un return al registro y mostrar algun tipo de alerta
+            
+    else:
+        name = data["name"]
+        user = data["user"]
+        password = data["password"]
+        email = data["email"]
+
     
-    for documentos in users:# la idea es comparar el diccionario que se forma con el FORM (data) y el diccionario en la base de datos
-        if data["email"] == documentos["email"]:
-            print("mismo email, ya tenes usuario")
-            break
-        
-    name = data["name"]
-    user = data["user"]
-    password = data["password"]
-    email = data["email"]
-
-    
-    user_model = UserModel(current_app)
+        user_model = UserModel(current_app)
 
 
-    try:
-        response = user_model.create_user(name, user, password, email)
-        return jsonify({response})
-        print("creacion exitosa!")
-    
-    except Exception as e:
-        return jsonify({e})
+        try:
+            response = user_model.create_user(name, user, password, email)
+            return jsonify({response})
+            print("creacion exitosa!")
+            #mostrar cartel de EXITO
+        except Exception as e:
+            return jsonify({e})
     
 
 
