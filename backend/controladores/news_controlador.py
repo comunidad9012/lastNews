@@ -13,3 +13,5 @@ def create_news():
     response = news_model.create_news(data)
 
     return response
+
+# arreglar que si o si tiene que tener contenido la noticia para crearla
