@@ -15,12 +15,10 @@ def create_user():
     data = request.json
     email=data["email"]
 
-    #traer todos los usuarios y comparar si hay coincidencia con el usuario recien ingresado el mail
- 
     user=coleccion.find_one({"email":email})
-
+ 
     if user:
-        print("hay coincidencia, ya existe esa cuenta")
+        return jsonify({"message": "Este usuario ya esta registrado"}), 404
         #aca hacer un return al registro y mostrar algun tipo de alerta
             
     else:
@@ -35,11 +33,12 @@ def create_user():
 
         try:
             response = user_model.create_user(name, user, password, email)
-            return jsonify({response})
             print("creacion exitosa!")
+            return jsonify({response})
             #mostrar cartel de EXITO
         except Exception as e:
             return jsonify({e})
+
     
 
 
