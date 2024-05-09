@@ -1,6 +1,6 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
     fetch(`http://localhost:5000/news/viewNews`, { //Esta es la url que deberia funcionar pero no anda por que hay que añadir el .html para ver el doc
         method: 'GET',
         headers: {
