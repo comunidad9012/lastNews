@@ -14,6 +14,8 @@ def create_news():
 
     return response
 
+# arreglar que si o si tiene que tener contenido la noticia para crearla
+
 @news_bp.get("/showNews") #CAMBIE LA PETICION POST POR GET, YA QUE CON ESTO QUEREMOS TRAER LOS DATOS EN EL FRONT
 def show_news():
     news_model=NewsModel(current_app)
