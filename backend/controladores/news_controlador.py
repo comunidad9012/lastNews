@@ -15,3 +15,17 @@ def create_news():
     return response
 
 # arreglar que si o si tiene que tener contenido la noticia para crearla
+
+@news_bp.post("/showNews")
+def show_news():
+    news_model=NewsModel(current_app)
+    response=news_model.show_news()
+    return response
+
+@news_bp.get("/viewNews")
+def specific_new():
+    id=request.args.get('id')
+    news_model=NewsModel(current_app)
+    response=news_model.specific_new(id)
+    return response
+

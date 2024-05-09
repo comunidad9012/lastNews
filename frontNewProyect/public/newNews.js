@@ -31,13 +31,6 @@ document.querySelector('.formNoticia').addEventListener('submit', event => {
     crearNoticia(data);
 });
 
-// Función para obtener todas las noticias
-function obtenerNoticias() {
-    return fetch('http://localhost:5000/news')
-        .then(response => response.json())
-        .catch(error => console.error('Error al obtener las noticias:', error));
-}
-
 // Función para actualizar noticias
 function actualizarNoticia(id, nuevaNoticia) {
     return fetch(`http://localhost:5000/news/${id}`, {
