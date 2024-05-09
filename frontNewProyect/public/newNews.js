@@ -1,8 +1,9 @@
 document.querySelector('.formNoticia').addEventListener('submit', event => {
     event.preventDefault();
-    
+    var titulo = document.getElementById('titulo').value;
     var contenido = tinymce.activeEditor.getContent();
     var data = {
+        titulo: titulo,
         noticia: contenido
     };
     
@@ -26,6 +27,7 @@ document.querySelector('.formNoticia').addEventListener('submit', event => {
             body: JSON.stringify(data)
         }).then(resp => resp.json()).then(resp => {
             if (resp.contenido == "exitoso") {
+                document.getElementById('titulo').value = '';
                 showSuccessMessage("¡Noticia creada exitosamente!");
                 // Limpiar el contenido del editor TinyMCE
                 tinymce.activeEditor.setContent('');

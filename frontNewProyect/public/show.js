@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:5000/news/showNews', { //ESTA PETICION LA CAMBIE POR GET Y NO LLEVA BODY, POR QUE NO LE MANDAMOS NADA
+    fetch('http://localhost:5000/news/showNews', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -8,15 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(data => {
         const noticiasDiv = document.getElementById('noticias');
-        data.forEach(noticia => {
+        let row;
+        data.forEach((noticia, index) => {
+            if (index % 3 === 0) {
+                row = document.createElement('div');
+                row.classList.add('row', 'mt-4');
+                noticiasDiv.appendChild(row);
+            }
             const noticiaElement = document.createElement('div');
-            noticiaElement.innerHTML = noticia.noticia;
-            noticiaElement.setAttribute('data-id', noticia._id.$oid);
+            noticiaElement.classList.add('col');
+            const titulo = document.createElement('h2');
+            titulo.textContent = noticia.titulo;
+            noticiaElement.appendChild(titulo);
             const enlace = document.createElement('a');
             enlace.textContent = 'Leer';
-            enlace.href = '/news/viewNews/'+ noticia._id.$oid; //aca hay que ver como manejar la ruta y los parametros para mostrar el html bien
+            enlace.href = '/news/viewNews/' + noticia._id.$oid;
             noticiaElement.appendChild(enlace);
-            noticiasDiv.appendChild(noticiaElement);
+            row.appendChild(noticiaElement);
         });
     })
     .catch(error => console.error('Error:', error));

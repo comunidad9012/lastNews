@@ -30,6 +30,7 @@
 <div class="conteiner text-center mt-4">
   <h2>Nueva noticia</h2>
   <h6>Escribe tu noticia utilizando el editor de textos</h6>
+  <a href="/news.html" class="btn btn-outline-dark"><i class="bi bi-plus-lg"></i>Inicio</a>
    <!-- Mensaje de éxito (oculto inicialmente) -->
 <div id="message-success" class="alert alert-success" style="display: none;">
   <span class="close-btn" onclick="closeMessage('message-success')">&times;</span>
@@ -58,6 +59,10 @@
     });
   </script>
   <form class="formNoticia">
+    <div class="col-md-8 mt-4 mb-4 ">
+      <label for="titulo">Titulo de la noticia:</label>
+      <input type="text" class="form-control" id="titulo" required>
+  </div>
   <textarea class="new"></textarea>
   <div class="conteiner text-center">
     <button type="submit" class="btn btn-success">Cargar Noticia</button>

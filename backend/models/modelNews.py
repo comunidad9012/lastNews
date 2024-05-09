@@ -9,7 +9,7 @@ class NewsModel:
 
     def create_news(self, data):
         if 'noticia' in data:
-            news_data = {'noticia': data['noticia']}
+            news_data = {'noticia': data['noticia'],'titulo':data['titulo']}
             self.mongo.db.news.insert_one(news_data)
             return {"contenido": "exitoso"}
         else:

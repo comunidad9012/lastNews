@@ -26,5 +26,5 @@ def show_news():
 def specific_new(id):
     news_model=NewsModel(current_app)
     response=(news_model.specific_new(id)).json
-    noticia = response.get('noticia')
-    return render_template("view.html", respuesta=noticia)
+    #noticia = response.get('noticia')
+    return render_template("view.html", respuesta=response)
