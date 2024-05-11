@@ -9,14 +9,14 @@ class NewsModel:
 
     def create_news(self, data):
         if 'noticia' in data:
-            news_data = {'noticia': data['noticia'],'titulo':data['titulo']}
+            news_data = {'noticia': data['noticia'],'titulo':data['titulo'], 'fecha':data['fecha']}
             self.mongo.db.news.insert_one(news_data)
             return {"contenido": "exitoso"}
         else:
             return {"contenido": "no funciona"}
         
     def show_news(self):
-        news=self.mongo.db.news.find()
+        news=self.mongo.db.news.find().sort('_id', -1)
         response=json_util.dumps(news)
         return Response(response, mimetype="application/json")
 
