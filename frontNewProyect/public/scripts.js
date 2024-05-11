@@ -1,5 +1,5 @@
 
-document.querySelector('.formNoticia').addEventListener('submit', event=>{
+document.querySelector('.formNoticia').addEventListener ('submit', event=>{
     event.preventDefault();
     var contenido = tinymce.activeEditor.getContent();
     var data = {
@@ -11,5 +11,10 @@ document.querySelector('.formNoticia').addEventListener('submit', event=>{
             'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     }).then(resp=>resp.json()).then(resp=> console.log(resp))
-});
+ });
+
+
+
+
+
 
