@@ -1,10 +1,13 @@
+inicio=document.querySelector('#inicio');
 document.querySelector('.formNoticia').addEventListener('submit', event => {
     event.preventDefault();
     var titulo = document.getElementById('titulo').value;
+    let now = new Date().toLocaleDateString()
     var contenido = tinymce.activeEditor.getContent();
     var data = {
         titulo: titulo,
-        noticia: contenido
+        noticia: contenido,
+        fecha: now
     };
     
     if (contenido == "") {
@@ -121,6 +124,13 @@ function closeMessage(messageId) {
     var messageDiv = document.getElementById(messageId);
     messageDiv.style.display = 'none';
 }
+
+inicio.addEventListener('click', (e) =>{
+    //e.preventDefault();
+    window.location.href = "http://127.0.0.1:5500/lastNews/frontNewProyect/public/news.html"
+
+});
+
 
 // Luego, puedes llamar a estas funciones en tu código JavaScript según sea necesario para mostrar mensajes dinámicos.
 // Por ejemplo:

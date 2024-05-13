@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => response.json())
     .then(data => {
-        const noticiasDiv = document.getElementById('noticias');
+        const noticiasDiv = document.getElementById('noticia');
         const noticiaElement = document.createElement('div');
         noticiaElement.innerHTML = data.noticia; 
         noticiasDiv.appendChild(noticiaElement);
