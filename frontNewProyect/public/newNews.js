@@ -127,8 +127,9 @@ function closeMessage(messageId) {
 
 inicio.addEventListener('click', (e) =>{
     //e.preventDefault();
-    window.location.href = "http://127.0.0.1:5500/lastNews/frontNewProyect/public/news.html"
-
+    //window.location.href = "http://127.0.0.1:5500/lastNews/frontNewProyect/public/news.html"
+    //href manda a otra ruta y con otro puerto, revisar
+    window.location.href = "http://127.0.0.1:5000/news.html"
 });
 
 
