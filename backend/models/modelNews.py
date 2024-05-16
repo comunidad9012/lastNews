@@ -16,7 +16,9 @@ class NewsModel:
             return {"contenido": "no funciona"}
         
     def show_news(self):
-        news=self.mongo.db.news.find().sort('_id', -1)
+        news=list(self.mongo.db.news.find().sort('_id', -1))
+        for item in news:
+            item['_id'] = str(item['_id'])
         response=json_util.dumps(news)
         return Response(response, mimetype="application/json")
 
