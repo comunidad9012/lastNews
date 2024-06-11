@@ -1,4 +1,4 @@
-from flask import Blueprint, request, current_app, render_template
+from flask import Blueprint, request, current_app
 from models.modelNews import NewsModel
 
 news_bp = Blueprint('news', __name__, url_prefix='/news')
@@ -22,6 +22,4 @@ def show_news():
 def specific_new(id):
     news_model=NewsModel(current_app)
     response=(news_model.specific_new(id)).json
-    #noticia = response.get('noticia')
-    #return render_template("view.html", respuesta=response)
     return response

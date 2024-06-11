@@ -13,7 +13,7 @@ function Create() {
   const handleTituloChange = (event) => {
     setTitulo(event.target.value);
   };
- 
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,9 +35,11 @@ function Create() {
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      alert('Noticia cargada con éxito');
     })
     .catch(error => {
       console.error('Error:', error);
+      alert('Error al cargar la noticia: ' + error.message);
     });
   };
 
@@ -65,7 +67,7 @@ function Create() {
               'alignleft aligncenter alignright alignjustify | ' +
               'bullist numlist outdent indent | removeformat | image | help',
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-            images_upload_url: 'http://localhost:5000/upload',
+            images_upload_url: 'http://localhost:5000/imgs/upload',
             automatic_uploads: true,
             file_picker_types: 'image',
             file_picker_callback: (cb, value, meta) => {
@@ -75,16 +77,27 @@ function Create() {
 
               input.onchange = function() {
                 const file = this.files[0];
-                const reader = new FileReader();
-                reader.onload = () => {
-                  const id = 'blobid' + (new Date()).getTime();
-                  const blobCache = editorRef.current.editorUpload.blobCache;
-                  const base64 = reader.result.split(',')[1];
-                  const blobInfo = blobCache.create(id, file, base64);
-                  blobCache.add(blobInfo);
-                  cb(blobInfo.blobUri(), { title: file.name });
-                };
-                reader.readAsDataURL(file);
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                fetch('http://localhost:5000/imgs/upload', {
+                  method: 'POST',
+                  body: formData
+                }) //ver de ir eliminando imagenes si se eliminan en el tiny, si no se puede spamear imagenes al servidor sin subir noticias
+                .then(response => response.json())
+                .then(data => {
+                  if (data.location) {
+                    cb(data.location, { title: file.name });
+                  } else {
+                    console.error('Error: la respuesta no contiene la URL de la imagen.');
+                    alert('Error: la respuesta no contiene la URL de la imagen.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error:', error);
+                  alert('Error al subir la imagen: ' + error.message);
+                });
               };
 
               input.click();
@@ -92,7 +105,7 @@ function Create() {
           }}
           onEditorChange={handleEditorChange}
         />
-        <div className="conteiner text-center mt-2">
+        <div className="container text-center mt-2">
           <button type="submit" className="btn btn-success">Cargar Noticia</button>
         </div>
       </form>
@@ -101,4 +114,5 @@ function Create() {
 }
 
 export default Create;
+
 
