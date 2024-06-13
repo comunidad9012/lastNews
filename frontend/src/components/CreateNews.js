@@ -108,6 +108,9 @@ function Create() {
         <div className="container text-center mt-2">
           <button type="submit" className="btn btn-success">Cargar Noticia</button>
         </div>
+        <div className="container text-center col-md-8 mt-4 mb-4 ">
+          <h5 className='mt-2'>Seleccionar miniatura</h5>
+        </div>
       </form>
     </div>
   );

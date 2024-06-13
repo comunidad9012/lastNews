@@ -16,6 +16,10 @@ function App() {
                 <Link className="nav-link active" aria-current="page" to="/news/editor">Crear noticia</Link>
               </li>
             </ul>
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" type="search" placeholder="Buscar noticia" aria-label="Search"/>
+              <button className="btn btn-outline-success" type="submit">Buscar</button>{/* Seguir con el backend */}
+            </form>
           </div>
         </div>
       </nav>
