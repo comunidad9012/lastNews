@@ -23,3 +23,10 @@ def specific_new(id):
     news_model=NewsModel(current_app)
     response=(news_model.specific_new(id)).json
     return response
+
+@news_bp.get("/find_new")
+def find_new():
+    palabra = request.form.get('palabra')
+    news_model = NewsModel(current_app)
+    response = news_model.find_news(palabra=palabra)
+    return response
